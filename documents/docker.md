@@ -44,5 +44,3 @@
   - `react-app` 이란 container 에 `/bin/sh` 라는 명령을 내리는 docker command. 실제로 하면 container에 접속됨.
 
 
-- `docker run --rm -it csyouk/react-app:latest npm run test`
-  - Run `npm run test` using docker.
