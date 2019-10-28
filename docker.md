@@ -46,3 +46,72 @@
 
 - `docker run --rm -it csyouk/react-app:latest npm run test`
   - Run `npm run test` using docker.
+
+
+## Implement multi-step builds
+- See [this](./react-app/Dockerfile).
+
+- Output is like this.
+```
+~/workspace/udemy/react-app:master ✓ ➭ docker build -t csyouk/react-app_in_nginx:latest .
+Sending build context to Docker daemon  158.9MB
+Step 1/8 : FROM node:alpine as builder
+ ---> 0fcfd7e52b09
+Step 2/8 : WORKDIR '/app'
+ ---> Using cache
+ ---> 83f84624b154
+Step 3/8 : COPY package.json .
+ ---> Using cache
+ ---> 4114453336c8
+Step 4/8 : RUN npm install
+ ---> Using cache
+ ---> 6d90b2ac0676
+Step 5/8 : COPY . .
+ ---> 6b4e38affaa6
+Step 6/8 : RUN npm run build
+ ---> Running in 49f2d4caefe9
+
+> react-app@0.1.0 build /app
+> react-scripts build
+
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  40.1 KB  build/static/js/2.7fcba3f7.chunk.js
+  774 B    build/static/js/runtime-main.d247ced4.js
+  611 B    build/static/js/main.efcfa5e1.chunk.js
+  417 B    build/static/css/main.b100e6da.chunk.css
+
+The project was built assuming it is hosted at the server root.
+You can control this with the homepage field in your package.json.
+For example, add this to build it for GitHub Pages:
+
+  "homepage" : "http://myname.github.io/myapp",
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://bit.ly/CRA-deploy
+
+Removing intermediate container 49f2d4caefe9
+ ---> b3054d90fe7c
+Step 7/8 : FROM nginx
+latest: Pulling from library/nginx
+8d691f585fa8: Pull complete
+5b07f4e08ad0: Pull complete
+abc291867bca: Pull complete
+Digest: sha256:922c815aa4df050d4df476e92daed4231f466acc8ee90e0e774951b0fd7195a4
+Status: Downloaded newer image for nginx:latest
+ ---> 540a289bab6c
+Step 8/8 : COPY --from=builder /app/build /usr/share/nginx/html
+ ---> 53814aed5faa
+Successfully built 53814aed5faa
+Successfully tagged csyouk/react-app_in_nginx:latest
+```
