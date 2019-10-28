@@ -12,3 +12,11 @@ It's style is YAML.
 - See [docker-compose.yml](./react-app/docker-compose.yml)
   - `tests` directive shows how to run test `react-app`
   - `docker-compose up --build` to build add service.
+
+
+## Docker attach
+- `docker attach <container ID>`
+  - ex) `docker attach react-app_tests_1`
+  - Create additional container and attach to existing container.
+  - 
+- But in `react-app` case `npm` create subprocess(`start.js`) and we can't directly attach to it.
