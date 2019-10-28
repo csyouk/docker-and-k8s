@@ -8,3 +8,8 @@ This project is a part of the course `Docker and k8s` ([lecture](https://www.ude
 - [How to write Dockerfile](./documents/dockerfile.md)
 - [How to use docker](./documents/docker.md)
 - [How to use docker-compose](./documents/docker-compose.md)
+
+
+# Ref list
+- [Docker Hub](https://hub.docker.com)
+- [44bits](https://www.44bits.io/ko/post/almost-perfect-development-environment-with-docker-and-docker-compose)
