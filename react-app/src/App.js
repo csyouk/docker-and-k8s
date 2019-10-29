@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Change feature branch to master branch.
         </a>
       </header>
     </div>

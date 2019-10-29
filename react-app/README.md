@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/csyouk/docker-react.svg?branch=master)](https://travis-ci.org/csyouk/docker-react) [![Coverage Status](https://coveralls.io/repos/github/csyouk/docker-react/badge.svg?branch=master)](https://coveralls.io/github/csyouk/docker-react?branch=master)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
