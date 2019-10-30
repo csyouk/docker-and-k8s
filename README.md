@@ -21,3 +21,5 @@ This project is a part of the course `Docker and k8s` ([lecture](https://www.ude
 - [Completed code for the AWS Multi Docker Project](https://github.com/StephenGrider/multi-docker)
 - [Completed code for the Multi K8s Project](https://github.com/StephenGrider/multi-k8s)
 
+## lectures
+- Multi-container CI CD setup: See section 10, **Github and Travis CI Setup**.
