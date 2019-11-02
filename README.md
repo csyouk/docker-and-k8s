@@ -11,6 +11,7 @@ This project is a part of the course `Docker and k8s` ([lecture](https://www.ude
   - 블로그 글, k8s doc 볼때 **declarative**/**imperative**한 방법 둘 다 있음을 생각한다.
   - **하지만, 실제 production 환경에서는 무조건 declarative 한 방법만 사용해야 한다.!!!!**
   - k8s는 언제나 **desired state** 의 상태로 가고자 한다. [참고](https://kubernetes.io/docs/concepts/)
+- [이미지 태그 변경없이 pod 이미지 바꾸는 방법.](https://github.com/kubernetes/kubernetes/issues/33664)
 
 ## Document list
 - [How to write Dockerfile](./documents/dockerfile.md)
