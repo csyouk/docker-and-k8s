@@ -83,6 +83,105 @@ d62a7b5a4bea        8454cbe08dc9                 "/usr/local/bin/kube…"   2 ho
 
 ![Goal](./images/k8s/final-goal.png)
 
+## Volume
+쿠버네티스에서 볼륨을 사용하는 구조는 PV라고 불리는 퍼시스턴트볼륨(PersistentVolume)과 PVC라고하는 퍼시스턴트볼륨클레임(PersistentVolumeClaim) 2개로 분리되어 있다.
+- PV는 볼륨 자체를 의미. 클러스터내에서 리소스로 다뤄진다.
+Pod하고는 별개로 관리되고 별도의 생명주기를 가지고 있다.
+- PVC는 사용자가 PV에 하는 요청. 사용하고 싶은 용량은 얼마인지 읽기/쓰기는 어떤 모드로 설정하고 싶은지등을 정해서 요청하는 식. 쿠버네티스는 볼륨을 포드에 직접할당하는 방식이 아니라 이렇게 중간에 PVC를 둠으로써 Pod과 Pod이 사용할 storage를 분리했다.
+
+#[stroage class explain](https://arisu1000.tistory.com/27849)
+
+#[storage-classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
+
+### Access mode (persistent volume claim)
+- ReadWriteOnce
+  - Can be used by a single node.
+- ReadOnlyMany
+  - Multiple nodes can read from this.
+- ReadWriteMany
+  - Can be read and written to by many nodes.
+
+### stroage class commands
+```
+% kubectl get storageclass
+NAME                 PROVISIONER                AGE
+standard (default)   k8s.io/minikube-hostpath   3d23h
+
+% kubectl describe storageclass
+Name:                  standard
+IsDefaultClass:        Yes
+Annotations:           storageclass.kubernetes.io/is-default-class=true
+Provisioner:           k8s.io/minikube-hostpath
+Parameters:            <none>
+AllowVolumeExpansion:  <unset>
+MountOptions:          <none>
+ReclaimPolicy:         Delete
+VolumeBindingMode:     Immediate
+Events:                <none>
+```
+
+## Creating a secret
+#[secret key](https://arisu1000.tistory.com/27844)
+
+## Handling Traffic
+### Load Balancer
+- classic way to handling network traffic
+
+### Ingress
+There are two different type of project.
+- ingress-nginx : community leads
+- kubernetes-ingress : nginx company leads
+
+#[참고](https://www.joyfulbikeshedding.com/blog/2018-03-26-studying-the-kubernetes-ingress-system.html)
+
+### Ingress dashboard
+f you are using Docker Desktop's built-in Kubernetes, setting up the admin dashboard is going to take a little more work.
+
+1. Grab the kubectl script we need to apply from the GitHub repository: https://github.com/kubernetes/dashboard
+
+2. We will need to download the config file locally so we can edit it (make sure you are copying the most current version from the repo).
+
+If on Mac or using GitBash on Windows enter the following:
+
+curl -O https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+
+If using PowerShell:
+
+Invoke-RestMethod -Uri https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml -Outfile kubernetes-dashboard.yaml
+
+3. Open up the downloaded file in your code editor and find line 116. Add the following two lines underneath --auto-generate-certificates:
+
+args:
+  - --auto-generate-certificates
+  - --enable-skip-login
+  - --disable-settings-authorizer
+4. Run the following command inside the directory where you downloaded the dashboard yaml file a few steps ago:
+
+kubectl apply -f kubernetes-dashboard.yaml
+
+5. Start the server by running the following command:
+
+kubectl proxy
+
+6. You can now access the dashboard by visiting:
+
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+
+7. You will be presented with a login screen:
+
+
+8. Click the "SKIP" link next to the SIGN IN button.
+
+9. You should now be redirected to the Kubernetes Dashboard:
+
+
+Important! The only reason we are bypassing RBAC Authorization to access the Kubernetes Dashboard is because we are running our cluster locally. You would never do this on a public facing server like Digital Ocean and would need to refer to the official docs to get the dashboard setup:
+https://github.com/kubernetes/dashboard/wiki/Access-control
+
+## skaffold
+
+
+------------------------
 ## k8s
 ### k8s commands
 - `kubectl cluster-info`

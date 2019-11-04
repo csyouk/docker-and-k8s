@@ -2,3 +2,6 @@ node_modules/*
 react-app/node_modules
 react-app/build
 .vscode/sftp.json
+multi-container-production/client/node_modules/*
+multi-container-production/server/node_modules/*
+multi-container-production/worker/node_modules/*
